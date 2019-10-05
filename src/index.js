@@ -1,27 +1,76 @@
-module.exports = function check(str, bracketsConfig) {
-	const stack = [];
-	for(let i = 0; i < str.length; i++){
-		configLoop: for (let j = 0; j < bracketsConfig.length; j++){
-			for( let k = 0; k < bracketsConfig[j].length; k++){
-				if(str[i] === bracketsConfig[j][k]){
-					if(k === 0 && stack[stack.length - 1] !== str[i]){
-						stack.push(bracketsConfig[j][1]);
-						break configLoop;
-					}else if(stack.pop() === str[i]){
-						break configLoop;
-					} else {
-						return false;
-					}
-					
-				}
-			}
-			
+module.exports = 
+function check(str, bracketsConfig) { 
+	
+	let stack = [];
+	
+	let arrFromStr = str.split(''); 
+
+	for (let i = 0; i <= arrFromStr.length-1; i++) {
+
+		
+		if(arrFromStr[0] == ')' || arrFromStr[0] == ']') {
+			return false;
+		} else if(arrFromStr[arrFromStr.length-1] == '(' || arrFromStr[arrFromStr.length-1] == '[') {
+			return false;
+		}
+		
+		if (arrFromStr[i] == "(" || arrFromStr[i] == "[" ||  arrFromStr[i] == "1" ||  arrFromStr[i] == "3" ||  arrFromStr[i] == "5") {
+			stack.push(arrFromStr[i]);
+		}; 
+		if (arrFromStr[i] == ")" || arrFromStr[i] == "]") {
+			if (arrFromStr[i] == ")" && stack[stack.length-1] == "(") {
+				stack.pop();
+			} else if (arrFromStr[i] == ")" && stack[stack.length-1] !== "(" ) {
+				stack.push(arrFromStr[i]);
+			 }
+			 if (arrFromStr[i] == "]" && stack[stack.length-1] == "[") {
+				stack.pop();
+			} else if (arrFromStr[i] == "]" && stack[stack.length-1] !== "[" ) {
+				stack.push(arrFromStr[i]);
+			 }
+		};
+		
+		if (arrFromStr[i] == "2" && stack[stack.length-1] == "1") {
+			stack.pop();
+		} else if (arrFromStr[i] == "2" && stack[stack.length-1] !== "1" ) {
+			stack.push(arrFromStr[i]);
+		 }
+		 if (arrFromStr[i] == "4" && stack[stack.length-1] == "3") {
+			stack.pop();
+		} else if (arrFromStr[i] == "4" && stack[stack.length-1] !== "3" ) {
+			stack.push(arrFromStr[i]);
+		 }
+		 if (arrFromStr[i] == "6" && stack[stack.length-1] == "5") {
+			stack.pop();
+		} else if (arrFromStr[i] == "6" && stack[stack.length-1] !== "5" ) {
+			stack.push(arrFromStr[i]);
+		 }
+
+
+		if (arrFromStr[i] == "|" && stack[stack.length-1] == "|") {
+			stack.pop();
+		} else if (arrFromStr[i] == "|" && stack[stack.length-1] !== "|" ) {
+			stack.push(arrFromStr[i]);
 		}
 
-	
-	}
-	return !stack.length;
-}
-  
- 
+		if (arrFromStr[i] == "7" && stack[stack.length-1] == "7") {
+			stack.pop();
+		} else if (arrFromStr[i] == "7" && stack[stack.length-1] !== "7" ) {
+			stack.push(arrFromStr[i]);
+		}
+		if (arrFromStr[i] == "8" && stack[stack.length-1] == "8") {
+			stack.pop();
+		} else if (arrFromStr[i] == "8" && stack[stack.length-1] !== "8" ) {
+			stack.push(arrFromStr[i]);
+		}
+		
+		
+	};
 
+	if (stack.length == 0) {
+		return true;
+	} else {
+		return false;
+	}
+
+}
